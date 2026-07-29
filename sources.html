@@ -43,10 +43,17 @@
 <main>
 
   <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Sources</span>
-      <h1 style="margin-top:8px;">References</h1>
-      <p class="lede">Full APA-style reference list for the claims made across this site, plus a statement on our use of AI tools.</p>
+    <div class="container grid-2 reverse">
+      <div>
+        <span class="eyebrow">Sources</span>
+        <h1 style="margin-top:8px;">References</h1>
+        <p class="lede">Full APA-style reference list for the claims made across this site, plus a statement on our use of AI tools.</p>
+      </div>
+      <div class="card qr-box qr-box--light" style="justify-self:center;">
+        <div class="qr-frame" data-qr-target data-qr-size="128"></div>
+        <span class="qr-caption">Scan for the sources PDF</span>
+        <a href="sources.pdf" style="font-size:0.8rem;font-weight:700;color:var(--rust);text-decoration:underline;text-decoration-color:var(--card-border-strong);">Or download directly</a>
+      </div>
     </div>
   </section>
 
@@ -154,6 +161,8 @@
   </div>
 </footer>
 
+<script src="js/qrcode.lib.js"></script>
+<script src="js/qrcode-render.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>

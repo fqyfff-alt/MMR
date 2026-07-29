@@ -667,6 +667,35 @@ table.data-table caption { caption-side: bottom; text-align: left; padding: 10px
 .source-note a { text-decoration: underline; text-decoration-color: var(--card-border-strong); }
 .source-note a:hover { color: var(--rust); }
 
+/* ---------- QR code ---------- */
+.qr-box { display: flex; flex-direction: column; align-items: center; gap: 9px; position: relative; }
+.qr-box .qr-frame {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 10px;
+  line-height: 0;
+  box-shadow: 0 10px 24px -10px rgba(0,0,0,0.4);
+  min-width: 96px;
+  min-height: 96px;
+}
+.qr-box .qr-frame[data-qr-target]:empty::before {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(45deg, #e4d7c2, #e4d7c2 6px, #f2e7d4 6px, #f2e7d4 12px);
+}
+.qr-box .qr-caption {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber-light);
+}
+.qr-box--light .qr-caption { color: var(--rust-dark); }
+.qr-box--light .qr-frame { box-shadow: var(--shadow-card); border: 1.5px solid var(--card-border); }
+
 .center-text { text-align: center; margin-inline: auto; }
 
 .two-col-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
