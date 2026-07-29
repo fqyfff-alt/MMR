@@ -152,6 +152,10 @@ p.lede {
 .pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* ---------- Header / Nav ---------- */
+/* Note: the frosted background lives on ::before (not on .site-header itself)
+   so that backdrop-filter does not turn .site-header into a containing block
+   for its position:fixed descendant (.main-nav on mobile), which would trap
+   the mobile menu inside the header's own box instead of the viewport. */
 .site-header {
   position: sticky;
   top: 0;
@@ -159,13 +163,19 @@ p.lede {
   height: var(--header-h);
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--card-border);
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: rgba(243, 234, 217, 0.86);
   backdrop-filter: blur(10px) saturate(1.2);
   -webkit-backdrop-filter: blur(10px) saturate(1.2);
-  border-bottom: 1px solid var(--card-border);
 }
 
 .nav-wrap {
+  position: relative;
   width: 100%;
   max-width: var(--max-width);
   margin-inline: auto;
@@ -435,7 +445,25 @@ p.lede {
 .people-row.is-visible svg { opacity: 1; transform: translateY(0); }
 
 /* ---------- Table ---------- */
-.table-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1.5px solid var(--card-border); }
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--card-border);
+  -webkit-overflow-scrolling: touch;
+  box-shadow: inset -14px 0 10px -10px rgba(46, 36, 32, 0.16);
+}
+.table-scroll-hint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-top: 10px;
+}
+@media (max-width: 700px) {
+  .table-scroll-hint { display: flex; }
+}
 table.data-table { min-width: 640px; background: var(--card-bg); }
 table.data-table th, table.data-table td {
   text-align: left;
@@ -650,3 +678,24 @@ table.data-table caption { caption-side: bottom; text-align: left; padding: 10px
 .challenge-item p { color: var(--text-muted); font-size: 0.94rem; }
 
 .section-alt { background: var(--cream-soft); }
+
+/* ---------- APA reference list ---------- */
+.apa-list { display: flex; flex-direction: column; gap: 20px; }
+.apa-list li {
+  padding-left: 2em;
+  text-indent: -2em;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.apa-list a { color: var(--rust-dark); text-decoration: underline; text-decoration-color: var(--card-border-strong); word-break: break-word; }
+.apa-list a:hover { color: var(--rust); }
+
+.ai-statement {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: clamp(20px, 3vw, 30px);
+}
+.ai-statement ul { margin: 14px 0; }
+.ai-statement li { display: flex; align-items: center; gap: 10px; padding: 4px 0; font-weight: 600; }
